@@ -1,15 +1,13 @@
 #include "City.h"
 
 #include <math.h>
-#include <iostream>
 
 namespace AStar{
 
-using std::cin;
-
-City::City(size_t number){
+City::City(int x, int y, size_t number){
 	this->number_ = number;
-	cin >> coord_x >> coord_y;
+	coord_x = x;
+	coord_y = y;
 	distance_evaluation_ = -1.0;
 	came_from_ = NULL;
 	closed_ = false;

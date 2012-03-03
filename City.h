@@ -15,7 +15,7 @@ private:
 	
 public:
 	vector<City*> roads;
-	City(size_t number);
+	City(int x, int y, size_t number);
 	double distance(City *other);
 	void addRoad(City *other);
 

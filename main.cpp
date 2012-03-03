@@ -6,7 +6,7 @@
 #include "City.h"
 #include <cstdlib>
 
-//#define _FREOPEN_READ
+#define _FREOPEN_READ
 #ifdef _FREOPEN_READ
 #include <stdio.h>
 #endif
@@ -37,7 +37,9 @@ int main(int argc, char *argv[]){
 
 		//read cities_ coordinates
 		for(size_t i = 0; i != n; ++i){
-			cities.push_back(new City(i));
+			int x, y;
+			cin >> x >> y;
+			cities.push_back(new City(x, y, i));
 		}
 
 		//read roads
@@ -82,7 +84,11 @@ int main(int argc, char *argv[]){
 			cout << endl;
 		}
 	} else {
-		std::cout << "algorithm with name " << argv[argc - 1] << " not found." << std::endl;
+		std::cout << "Algorithm with name " << argv[argc - 1] << " not found." << std::endl;
+	}
+
+	for(size_t i = 0; i != n; ++i){
+		delete (cities[i]);
 	}
 
 	return 0;
