@@ -2,7 +2,7 @@
 
 namespace AStar{
 
-double Dijkstra::heuristicCostEstimate(size_t from){
+double Dijkstra::heuristicCostEstimate(City *from){
 	return 0.0;
 }
 

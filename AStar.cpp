@@ -13,11 +13,11 @@ AStar::~AStar(){
 	delete[] distance_array_;
 }
 
-double AStar::heuristicCostEstimate(size_t from){
-	if (distance_array_[from] == -1.0){
-		distance_array_[from] = distance(from, finish_city);
+double AStar::heuristicCostEstimate(City *from){
+	if (distance_array_[from->number()] == -1.0){
+		distance_array_[from->number()] = distance(from, finish_city);
 	}
-	return distance_array_[from];
+	return distance_array_[from->number()];
 }
 
 }

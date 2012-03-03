@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string.h>
 #include "AStar.h"
-#include "Dijkstra.h"
+#include "Number.h"
 
 int main(int argc, char *argv[]){
 	using AStar::BaseAStar;
 	using AStar::Dijkstra;
+	using AStar::Number;
 	using AStar::AStar;
 	
 
@@ -16,7 +17,12 @@ int main(int argc, char *argv[]){
 	if (strcmp(argv[argc - 1], "Dijkstra") == 0){
 		clazz = new Dijkstra();
 	}
+	if (strcmp(argv[argc - 1], "Number") == 0){
+		clazz = new Number();
+	}
+
 	clazz->calculate();
+
 	delete (clazz);
 
 	return 0;

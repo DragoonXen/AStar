@@ -12,7 +12,7 @@ public:
 
 private:
 	double* distance_array_;
-	double heuristicCostEstimate(size_t from);
+	double heuristicCostEstimate(City *from);
 };
 }
 

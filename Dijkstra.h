@@ -6,8 +6,8 @@
 namespace AStar{
 class Dijkstra : public BaseAStar {
 
-private:
-	double heuristicCostEstimate(size_t from);
+protected:
+	double heuristicCostEstimate(City *from);
 };
 
 }
