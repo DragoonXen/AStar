@@ -1,4 +1,4 @@
-#include "QueueNode.h";
+#include "QueueNode.h"
 
 namespace AStar{
 	bool QueueNode::operator > (const QueueNode &other) const{
