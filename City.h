@@ -13,7 +13,6 @@ private:
 	size_t number_;
 	bool closed_;//no need to calculate smth to & from this city
 	
-	
 public:
 	vector<City*> roads;
 	City(size_t number);

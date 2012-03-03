@@ -2,6 +2,6 @@
 
 namespace AStar{
 	bool QueueNode::operator > (const QueueNode &other) const{
-		return funcG > other.funcG;
+		return estimate_distance > other.estimate_distance;
 	}
 }

@@ -6,8 +6,10 @@
 namespace AStar{
 class Number : public Dijkstra {
 
+public:
+	Number(vector<City*> cities, size_t start_city_nom, size_t finish_city_nom);
 protected:
-	double distance(City *from, City *to);
+	virtual double distance(City *from, City *to);
 };
 
 }

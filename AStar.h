@@ -7,12 +7,12 @@ namespace AStar{
 class AStar : public BaseAStar {
 
 public:
-	AStar();
+	AStar(vector<City*> cities, size_t start_city_nom, size_t finish_city_nom);
 	virtual ~AStar();
 
 private:
 	double* distance_array_;
-	double heuristicCostEstimate(City *from);
+	virtual double heuristicCostEstimate(City *from);
 };
 }
 

@@ -6,8 +6,11 @@
 namespace AStar{
 class Dijkstra : public BaseAStar {
 
+public:
+	Dijkstra(vector<City*> cities, size_t start_city_nom, size_t finish_city_nom);
+
 protected:
-	double heuristicCostEstimate(City *from);
+	virtual double heuristicCostEstimate(City *from);
 };
 
 }

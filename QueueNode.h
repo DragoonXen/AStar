@@ -5,7 +5,7 @@
 namespace AStar{
 struct QueueNode{
 	double traveledDistance;
-	double funcG; //funcG = traveledDistance + heuristicDistance;
+	double estimate_distance; //funcG = traveledDistance + heuristicDistance;
 	City* city;
 
 	bool operator > (const QueueNode &other) const;

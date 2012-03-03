@@ -1,77 +1,38 @@
 #include "BaseAStar.h"
 #include "QueueNode.h"
-#include <iostream>
 #include <algorithm>
 #include <math.h>
 #include <queue>
-#include <iostream>
-
-#define _FREOPEN_READ
-#ifdef _FREOPEN_READ
-#include <stdio.h>
-#endif
 
 namespace AStar{
-	using std::cin;
-	using std::cout;
-	using std::endl;
-	using std::priority_queue;
-
-	BaseAStar::BaseAStar(){
-#ifdef _FREOPEN_READ
-		freopen("input.txt","r",stdin);
-#endif
-		size_t n, m;
-		size_t start_city_nom, finish_city_nom;
-		cin >> n >> m >> start_city_nom >> finish_city_nom;
-		//convert to zero based indexes
-		--start_city_nom; --finish_city_nom;
-
-		cities.reserve(n);
-
-		//read cities coordinates
-		for(size_t i = 0; i != n; ++i){
-			cities.push_back(new City(i));
-		}
-		start_city = cities[start_city_nom];
-		finish_city = cities[finish_city_nom];
-
-		//read roads
-		for(size_t i = 0; i != m; ++i){
-			size_t q, w;
-			cin >> q >> w;
-			cities[--q]->addRoad(cities[--w]);
-			cities[w]->addRoad(cities[q]);
-		}
-
-#ifdef _FREOPEN_READ
-		fclose(stdin);
-#endif
+	BaseAStar::BaseAStar(vector<City*> cities, size_t start_city_nom, size_t finish_city_nom){
+		cities_.assign(cities.begin(), cities.end());
+		start_city = cities_[start_city_nom];
+		finish_city = cities_[finish_city_nom];
 	}
 
 	size_t BaseAStar::citiesCount(){
-		return cities.size();
+		return cities_.size();
 	}
 
 	double BaseAStar::distance(City *from, City *to){
 		return from->distance(to);
 	}
 
-	void BaseAStar::calculate(){
-		priority_queue<QueueNode, vector<QueueNode>, std::greater<QueueNode> > open_set;
+	vector<City*> BaseAStar::calculate(){
+		std::priority_queue<QueueNode, vector<QueueNode>, std::greater<QueueNode> > open_set;
 		//create start node
 		QueueNode node;
 		node.traveledDistance = 0;
 		node.city = start_city;
-		node.funcG = heuristicCostEstimate(start_city);
+		node.estimate_distance = heuristicCostEstimate(start_city);
 		open_set.push(node);
 		start_city->distance_evaluation(0.0);
 
 		while (open_set.size()){
 			node = open_set.top();
 			if (node.city == finish_city){
-				print_result();
-				return;
+				return generate_path();
 			}
 			open_set.pop();
 
@@ -91,28 +52,21 @@ namespace AStar{
 					tmp.city = aim_city;
 					aim_city->distance_evaluation(tmp.traveledDistance = tentative_distance);
 					aim_city->came_from(node.city);
-					tmp.funcG = tentative_distance + heuristicCostEstimate(aim_city);
+					tmp.estimate_distance = tentative_distance + heuristicCostEstimate(aim_city);
 
 					open_set.push(tmp);
 				}
 			}
 		}
+		vector<City*> empty_path;
+		return empty_path;
 	}
 
-	void BaseAStar::print_result(){
-		cout << finish_city->distance_evaluation() << endl;
-		vector<size_t> cities_path;
-
+	vector<City*> BaseAStar::generate_path(){
+		vector<City*> cities_path;
 		for(City *i = finish_city; i != NULL; i = i->came_from()){
-			cities_path.push_back(i->number() + 1);
+			cities_path.push_back(i);
 		}
-
-		cout << cities_path.size() << endl;
-
-		for(vector<size_t>::reverse_iterator it = cities_path.rbegin(); it != cities_path.rend(); ++it){
-			cout << *it << ' ';
-		}
-
-		cout << endl;
+		return cities_path;
 	}
 }
