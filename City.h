@@ -1,6 +1,7 @@
 #ifndef CITY_H_
 #define CITY_H_
 #include <vector>
+#include <cstdlib>
 
 namespace AStar{
 	using std::vector;

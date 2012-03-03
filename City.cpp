@@ -1,7 +1,6 @@
 #include "City.h"
 
 #include <math.h>
-#include <cstdlib>
 
 namespace AStar{
 
