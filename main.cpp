@@ -6,7 +6,7 @@
 #include "City.h"
 #include <cstdlib>
 
-#define _FREOPEN_READ
+//#define _FREOPEN_READ
 #ifdef _FREOPEN_READ
 #include <stdio.h>
 #endif
